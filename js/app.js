@@ -68,7 +68,9 @@ const App = {
   // ---- Book Card Rendering ----
   createBookCard(book) {
     const isUz = I18n.isUzbek();
-    const title = isUz ? book.title : book.titleRu;
+    const titleRaw = isUz ? book.title : book.titleRu;
+    const title = typeof titleRaw === 'object' && titleRaw !== null ? titleRaw.uz || titleRaw.ru : titleRaw;
+    const coverImage = book.coverImage || book.cover || 'assets/images/placeholder.jpg';
     const author = isUz ? book.author : book.authorRu;
 
     let badgeHTML = '';
@@ -87,10 +89,10 @@ const App = {
     card.dataset.category = book.category;
 
     let coverHTML;
-    if (book.coverImage) {
+    if (coverImage !== 'assets/images/placeholder.jpg') {
       coverHTML = `
         <div class="book-card__cover-art" style="background: ${book.gradient}; padding: 0;">
-          <img src="${book.coverImage}" alt="${title}" style="width:100%; height:100%; object-fit:cover;" loading="lazy">
+          <img src="${coverImage}" alt="${title}" style="width:100%; height:100%; object-fit:cover;" loading="lazy">
         </div>
       `;
     } else {

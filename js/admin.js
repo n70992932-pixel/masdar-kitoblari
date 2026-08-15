@@ -113,13 +113,11 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       const newBook = {
-        title: {
-          uz: document.getElementById('title_uz').value,
-          ru: document.getElementById('title_uz').value
-        },
+        title: document.getElementById('title_uz').value,
+        titleRu: document.getElementById('title_uz').value, // Fallback
         author: document.getElementById('author').value,
         price: parseInt(document.getElementById('price').value),
-        cover: coverUrl,
+        coverImage: coverUrl,
         category: "badiiy",
         isBestseller: false,
         year: 2024,
