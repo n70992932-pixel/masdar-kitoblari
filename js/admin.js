@@ -108,9 +108,9 @@ document.addEventListener('DOMContentLoaded', () => {
   // Import existing books from books.js
   importBtn.addEventListener('click', async () => {
     if (confirm("Diqqat! Bu hozirgi kod ichidagi barcha kitoblarni bazaga yozadi. Davom etamizmi?")) {
-      if (typeof books !== 'undefined' && Array.isArray(books)) {
+      if (typeof BOOKS !== 'undefined' && Array.isArray(BOOKS)) {
         let count = 0;
-        for (const book of books) {
+        for (const book of BOOKS) {
           try {
             await db.collection("books").doc(book.id).set(book);
             count++;
@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         alert(`Muvaffaqiyatli! ${count} ta kitob bazaga yozildi.`);
       } else {
-        alert("books.js topilmadi!");
+        alert("books.js topilmadi yoki BOOKS o'zgaruvchisi yo'q!");
       }
     }
   });
