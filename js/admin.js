@@ -70,26 +70,50 @@ document.addEventListener('DOMContentLoaded', () => {
   // Add Book
   addBookForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-    const newBook = {
-      title: {
-        uz: document.getElementById('title_uz').value,
-        ru: document.getElementById('title_uz').value
-      },
-      author: document.getElementById('author').value,
-      price: parseInt(document.getElementById('price').value),
-      cover: document.getElementById('cover').value,
-      category: "badiiy",
-      isBestseller: false,
-      year: 2024,
-      createdAt: firebase.firestore.FieldValue.serverTimestamp()
-    };
+    const btn = e.target.querySelector('button[type="submit"]');
+    const oldText = btn.textContent;
+    btn.textContent = "Yuklanmoqda...";
+    btn.disabled = true;
 
     try {
-      await db.collection("books").add(newBook);
+      const fileInput = document.getElementById('book-cover');
+      const file = fileInput.files[0];
+      let coverUrl = "";
+
+      if (file) {
+        const storageRef = storage.ref();
+        const fileRef = storageRef.child('covers/' + Date.now() + '_' + file.name);
+        await fileRef.put(file);
+        coverUrl = await fileRef.getDownloadURL();
+      } else {
+        alert("Iltimos, rasm tanlang!");
+        btn.textContent = oldText;
+        btn.disabled = false;
+        return;
+      }
+
+      const newBook = {
+        title: {
+          uz: document.getElementById('title_uz').value,
+          ru: document.getElementById('title_uz').value
+        },
+        author: document.getElementById('author').value,
+        price: parseInt(document.getElementById('price').value),
+        cover: coverUrl,
+        category: "badiiy",
+        isBestseller: false,
+        year: 2024,
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      };
+
+      await db.collection('books').add(newBook);
       addBookForm.reset();
     } catch (error) {
-      console.error("Error adding document: ", error);
-      alert("Xatolik: " + error.message);
+      console.error("Xatolik:", error);
+      alert("Xato: " + error.message);
+    } finally {
+      btn.textContent = oldText;
+      btn.disabled = false;
     }
   });
 

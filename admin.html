@@ -270,10 +270,10 @@
               <label>Narx (so'm)</label>
               <input type="number" id="price" placeholder="45000" required>
             </div>
-            <div class="admin-form-group">
-              <label>Muqova rasmi (URL)</label>
-              <input type="text" id="cover" placeholder="assets/images/book_1.jpg" required>
-            </div>
+            <div class="form-group">
+                  <label for="book-cover">Muqova rasmi (Fayl)</label>
+                  <input type="file" id="book-cover" accept="image/*" required>
+                </div>
           </div>
           <button type="submit" class="btn-admin" style="width: auto; padding: 0.8rem 2rem;">Qo'shish</button>
         </form>
@@ -307,7 +307,7 @@
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-  
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-storage-compat.js"></script>
   <script src="js/firebase-init.js"></script>
   <script src="js/books.js"></script>
   <script src="js/admin.js"></script>
