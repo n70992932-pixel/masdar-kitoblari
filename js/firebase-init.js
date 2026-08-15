@@ -1,6 +1,6 @@
 // Firebase SDK (Compat Version)
 const firebaseConfig = {
-  apiKey: "AIzaSyAB9yCMRZiAedOMmxxYZcdeR6Bon6ecimw",
+  apiKey: "AIzaSyAB9yCMRZIAedOMmxxYZcdeR6Bon6ecimw",
   authDomain: "masdar-kitoblari.firebaseapp.com",
   projectId: "masdar-kitoblari",
   storageBucket: "masdar-kitoblari.firebasestorage.app",
