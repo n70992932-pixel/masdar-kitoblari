@@ -3,96 +3,312 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Panel | Masdar Kitoblari</title>
+  <title>Boshqaruv Paneli | Masdar Kitoblari</title>
   <link rel="stylesheet" href="css/style.css">
   <style>
-    .admin-container { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; }
-    .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
-    .admin-table { width: 100%; border-collapse: collapse; margin-bottom: 2rem; }
-    .admin-table th, .admin-table td { border: 1px solid var(--border-color); padding: 1rem; text-align: left; }
-    .admin-table th { background: var(--bg-secondary); }
-    .btn-action { padding: 0.5rem 1rem; border: none; border-radius: 4px; cursor: pointer; color: white; }
-    .btn-edit { background: var(--accent-color); }
-    .btn-delete { background: #ff4d4f; }
-    .admin-form { background: var(--bg-secondary); padding: 2rem; border-radius: 8px; }
-    .form-group { margin-bottom: 1rem; }
-    .form-group label { display: block; margin-bottom: 0.5rem; }
-    .form-group input, .form-group textarea { width: 100%; padding: 0.5rem; border: 1px solid var(--border-color); border-radius: 4px; background: var(--bg-primary); color: var(--text-primary); }
+    /* Admin Global Variables */
+    :root {
+      --admin-bg: #1e1e1e;
+      --admin-surface: #2c2c2c;
+      --admin-border: #3d3d3d;
+      --admin-text: #e0e0e0;
+      --admin-primary: #4a90e2;
+      --admin-danger: #e24a4a;
+      --admin-success: #4ae26f;
+    }
+
+    body {
+      background-color: var(--admin-bg);
+      color: var(--admin-text);
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Login Screen */
+    .admin-login-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex: 1;
+      height: 100vh;
+    }
+    .admin-login-card {
+      background: var(--admin-surface);
+      padding: 3rem;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      width: 100%;
+      max-width: 400px;
+      border: 1px solid var(--admin-border);
+      text-align: center;
+    }
+    .admin-login-card h2 {
+      margin-bottom: 2rem;
+      color: white;
+    }
+    .admin-form-group {
+      margin-bottom: 1.5rem;
+      text-align: left;
+    }
+    .admin-form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+    .admin-form-group input {
+      width: 100%;
+      padding: 0.8rem;
+      border: 1px solid var(--admin-border);
+      border-radius: 6px;
+      background: var(--admin-bg);
+      color: white;
+      outline: none;
+      transition: border-color 0.3s;
+      box-sizing: border-box;
+    }
+    .admin-form-group input:focus {
+      border-color: var(--admin-primary);
+    }
+    .btn-admin {
+      width: 100%;
+      padding: 0.8rem;
+      background: var(--admin-primary);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+    .btn-admin:hover {
+      background: #357abd;
+    }
+
+    /* Dashboard Screen */
+    .dashboard-layout {
+      display: none;
+      flex: 1;
+    }
+    
+    .sidebar {
+      width: 250px;
+      background: var(--admin-surface);
+      border-right: 1px solid var(--admin-border);
+      padding: 2rem 1rem;
+      display: flex;
+      flex-direction: column;
+    }
+    .sidebar-logo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: white;
+      text-align: center;
+      margin-bottom: 3rem;
+      text-decoration: none;
+    }
+    .sidebar-menu {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .sidebar-menu li {
+      margin-bottom: 0.5rem;
+    }
+    .sidebar-menu a {
+      display: block;
+      padding: 0.8rem 1rem;
+      color: var(--admin-text);
+      text-decoration: none;
+      border-radius: 6px;
+      transition: background 0.2s;
+    }
+    .sidebar-menu a:hover, .sidebar-menu a.active {
+      background: var(--admin-primary);
+      color: white;
+    }
+
+    .main-content {
+      flex: 1;
+      padding: 2rem 3rem;
+      overflow-y: auto;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 3rem;
+      border-bottom: 1px solid var(--admin-border);
+      padding-bottom: 1rem;
+    }
+    .topbar h1 {
+      margin: 0;
+      font-size: 1.8rem;
+    }
+    .btn-logout {
+      background: transparent;
+      color: var(--admin-danger);
+      border: 1px solid var(--admin-danger);
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .btn-logout:hover {
+      background: var(--admin-danger);
+      color: white;
+    }
+
+    /* Cards & Tables */
+    .card {
+      background: var(--admin-surface);
+      border-radius: 12px;
+      border: 1px solid var(--admin-border);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+    .card-header h3 {
+      margin: 0;
+    }
+    .table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .table th, .table td {
+      padding: 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--admin-border);
+    }
+    .table th {
+      color: #aaa;
+      font-weight: 500;
+      text-transform: uppercase;
+      font-size: 0.8rem;
+    }
+    .btn-sm {
+      padding: 0.3rem 0.6rem;
+      font-size: 0.8rem;
+      border-radius: 4px;
+      border: none;
+      cursor: pointer;
+      color: white;
+    }
+    .btn-danger { background: var(--admin-danger); }
+    .btn-success { background: var(--admin-success); color: #000; font-weight: bold;}
+    
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
   </style>
 </head>
 <body>
-  <header class="header">
-    <div class="container">
-      <div class="header__inner">
-        <a href="index.html" class="header__logo">MASDAR ADMIN</a>
-      </div>
-    </div>
-  </header>
 
-  <main class="admin-container" id="admin-main" style="display: none;">
-    <div class="admin-header">
-      <h2>Kitoblar ro'yxati</h2>
-      <div>
-        <button id="import-btn" class="btn-action" style="background: #52c41a;">Barcha kitoblarni bazaga yuklash</button>
-      </div>
-    </div>
-
-    <table class="admin-table">
-      <thead>
-        <tr>
-          <th>Rasm</th>
-          <th>Nom</th>
-          <th>Muallif</th>
-          <th>Narx</th>
-          <th>Amallar</th>
-        </tr>
-      </thead>
-      <tbody id="admin-books-list">
-        <!-- Populated by JS -->
-      </tbody>
-    </table>
-
-    <div class="admin-form">
-      <h3>Yangi kitob qo'shish</h3>
-      <form id="add-book-form">
-        <div class="form-group">
-          <label>Nomi (O'zbekcha)</label>
-          <input type="text" id="title_uz" required>
+  <!-- LOGIN SCREEN -->
+  <div class="admin-login-wrapper" id="login-view">
+    <div class="admin-login-card">
+      <h2>Boshqaruv Paneli</h2>
+      <form id="admin-login-form">
+        <div class="admin-form-group">
+          <label>Email manzil</label>
+          <input type="email" id="login-email" placeholder="admin@masdar.uz" required>
         </div>
-        <div class="form-group">
-          <label>Muallif</label>
-          <input type="text" id="author" required>
+        <div class="admin-form-group">
+          <label>Parol</label>
+          <input type="password" id="login-password" placeholder="Parolni kiriting" required>
         </div>
-        <div class="form-group">
-          <label>Narx (so'm)</label>
-          <input type="number" id="price" required>
-        </div>
-        <div class="form-group">
-          <label>Muqova rasm URL (masalan: assets/images/book_1.jpg)</label>
-          <input type="text" id="cover" required>
-        </div>
-        <button type="submit" class="btn-action" style="background: var(--accent-color);">Saqlash</button>
+        <button type="submit" class="btn-admin">Tizimga kirish</button>
       </form>
     </div>
-  </main>
+  </div>
 
-  <section class="profile-view" id="admin-login-view">
-    <div class="container" style="text-align: center; padding: 6rem 0;">
-      <h2>Admin Panelga Kirish</h2>
-      <div id="telegram-login-container" style="display: flex; justify-content: center; margin-top: 2rem;">
-        <button id="custom-tg-login-btn" style="background-color: #2AABEE; color: white; border: none; border-radius: 50px; padding: 12px 32px; font-size: 1rem; cursor: pointer;">
-          Telegram bilan kirish
-        </button>
+  <!-- DASHBOARD SCREEN -->
+  <div class="dashboard-layout" id="dashboard-view">
+    <aside class="sidebar">
+      <a href="index.html" class="sidebar-logo">MASDAR</a>
+      <ul class="sidebar-menu">
+        <li><a href="#" class="active">Kitoblar</a></li>
+        <li><a href="index.html" target="_blank">Saytni ko'rish ↗</a></li>
+      </ul>
+    </aside>
+
+    <main class="main-content">
+      <div class="topbar">
+        <h1>Kitoblar ro'yxati</h1>
+        <div>
+          <button id="logout-btn" class="btn-logout">Chiqish</button>
+        </div>
       </div>
-    </div>
-  </section>
+
+      <div class="card">
+        <div class="card-header">
+          <h3>Yangi kitob qo'shish</h3>
+        </div>
+        <form id="add-book-form">
+          <div class="grid-2">
+            <div class="admin-form-group">
+              <label>Kitob nomi (O'zbekcha)</label>
+              <input type="text" id="title_uz" placeholder="Masalan: O'tkan kunlar" required>
+            </div>
+            <div class="admin-form-group">
+              <label>Muallif</label>
+              <input type="text" id="author" placeholder="Abdulla Qodiriy" required>
+            </div>
+            <div class="admin-form-group">
+              <label>Narx (so'm)</label>
+              <input type="number" id="price" placeholder="45000" required>
+            </div>
+            <div class="admin-form-group">
+              <label>Muqova rasmi (URL)</label>
+              <input type="text" id="cover" placeholder="assets/images/book_1.jpg" required>
+            </div>
+          </div>
+          <button type="submit" class="btn-admin" style="width: auto; padding: 0.8rem 2rem;">Qo'shish</button>
+        </form>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h3>Barcha kitoblar</h3>
+          <button id="import-btn" class="btn-sm btn-success">Eski kitoblarni bazaga tortish</button>
+        </div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Rasm</th>
+              <th>Nom</th>
+              <th>Muallif</th>
+              <th>Narx</th>
+              <th>Harakatlar</th>
+            </tr>
+          </thead>
+          <tbody id="admin-books-list">
+            <!-- Populated by JS -->
+          </tbody>
+        </table>
+      </div>
+
+    </main>
+  </div>
 
   <!-- Firebase -->
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
-  <script src="js/firebase-init.js"></script>
   
-  <script src="https://telegram.org/js/telegram-widget.js?22"></script>
+  <script src="js/firebase-init.js"></script>
   <script src="js/books.js"></script>
   <script src="js/admin.js"></script>
 </body>

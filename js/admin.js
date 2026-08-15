@@ -1,50 +1,49 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const adminLoginView = document.getElementById('admin-login-view');
-  const adminMain = document.getElementById('admin-main');
-  const customTgBtn = document.getElementById('custom-tg-login-btn');
+  const loginView = document.getElementById('login-view');
+  const dashboardView = document.getElementById('dashboard-view');
+  const loginForm = document.getElementById('admin-login-form');
+  const logoutBtn = document.getElementById('logout-btn');
+  
   const booksList = document.getElementById('admin-books-list');
   const addBookForm = document.getElementById('add-book-form');
   const importBtn = document.getElementById('import-btn');
 
-  // TODO: Replace with the actual admin's Telegram ID later
-  const ADMIN_ID = 123456789; // Placeholder
-
-  function checkAuth(user) {
-    if (!user) {
-      adminLoginView.style.display = 'block';
-      adminMain.style.display = 'none';
-      return;
+  // Firebase Auth State Listener
+  firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+      // User is signed in
+      loginView.style.display = 'none';
+      dashboardView.style.display = 'flex';
+      loadBooks();
+    } else {
+      // No user is signed in
+      loginView.style.display = 'flex';
+      dashboardView.style.display = 'none';
     }
+  });
 
-    // In a real app, you'd check ADMIN_ID, but for now we'll show their ID so they can tell us
-    // if (user.id !== ADMIN_ID) {
-    //   alert(`Siz admin emassiz! Sizning ID: ${user.id}`);
-    //   return;
-    // }
+  // Login
+  loginForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const email = document.getElementById('login-email').value;
+    const password = document.getElementById('login-password').value;
 
-    // For setup purposes, let's just let anyone in, but alert their ID so they know it
-    console.log("Logged in user ID:", user.id);
-    
-    adminLoginView.style.display = 'none';
-    adminMain.style.display = 'block';
-    loadBooks();
-  }
-
-  // Telegram Login Callback
-  window.onTelegramAuth = function(user) {
-    checkAuth(user);
-  };
-
-  // Bind Login Button
-  customTgBtn?.addEventListener('click', () => {
-    if (window.Telegram && window.Telegram.Login) {
-      window.Telegram.Login.auth({
-        bot_id: '8157364100',
-        request_access: 'write'
-      }, (data) => {
-        if (data) window.onTelegramAuth(data);
+    firebase.auth().signInWithEmailAndPassword(email, password)
+      .then((userCredential) => {
+        // Signed in 
+        console.log("Logged in:", userCredential.user.email);
+      })
+      .catch((error) => {
+        console.error("Login failed:", error.message);
+        alert("Kirishda xatolik: Email yoki parol noto'g'ri!");
       });
-    }
+  });
+
+  // Logout
+  logoutBtn.addEventListener('click', () => {
+    firebase.auth().signOut().catch((error) => {
+      console.error("Logout error:", error);
+    });
   });
 
   // Load books from Firestore
@@ -55,12 +54,12 @@ document.addEventListener('DOMContentLoaded', () => {
         const book = doc.data();
         const tr = document.createElement('tr');
         tr.innerHTML = `
-          <td><img src="${book.cover}" width="50" style="border-radius: 4px;"></td>
-          <td>${book.title?.uz || book.title}</td>
-          <td>${book.author}</td>
+          <td><img src="${book.cover}" width="40" style="border-radius: 4px;"></td>
+          <td>${book.title?.uz || book.title || 'Nomsiz'}</td>
+          <td>${book.author || 'Noma\'lum'}</td>
           <td>${book.price} so'm</td>
           <td>
-            <button class="btn-action btn-delete" onclick="deleteBook('${doc.id}')">O'chirish</button>
+            <button class="btn-sm btn-danger" onclick="deleteBook('${doc.id}')">O'chirish</button>
           </td>
         `;
         booksList.appendChild(tr);
@@ -74,20 +73,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const newBook = {
       title: {
         uz: document.getElementById('title_uz').value,
-        ru: document.getElementById('title_uz').value // simplified for now
+        ru: document.getElementById('title_uz').value
       },
       author: document.getElementById('author').value,
       price: parseInt(document.getElementById('price').value),
       cover: document.getElementById('cover').value,
       category: "badiiy",
       isBestseller: false,
-      year: 2024
+      year: 2024,
+      createdAt: firebase.firestore.FieldValue.serverTimestamp()
     };
 
     try {
       await db.collection("books").add(newBook);
       addBookForm.reset();
-      alert("Kitob qo'shildi!");
     } catch (error) {
       console.error("Error adding document: ", error);
       alert("Xatolik: " + error.message);
@@ -115,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
             await db.collection("books").doc(book.id).set(book);
             count++;
           } catch(e) {
-            console.error(e);
+            console.error("Error importing:", e);
           }
         }
         alert(`Muvaffaqiyatli! ${count} ta kitob bazaga yozildi.`);
