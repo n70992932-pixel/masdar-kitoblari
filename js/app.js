@@ -14,10 +14,16 @@ const App = {
   catalogPerPage: 15,
 
   // ---- Initialization ----
-  init() {
+  async init() {
     this.initTheme();
     I18n.init();
     Cart.init();
+    
+    // Load books from Firebase before rendering
+    if (typeof loadBooksFromFirebase === 'function') {
+      await loadBooksFromFirebase();
+    }
+
     this.renderCategories();
     this.renderAllSections();
     this.renderPublisherFilters();
