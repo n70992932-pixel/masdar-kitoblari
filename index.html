@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="uz" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Masdar Kitoblari — bilim manbasini kashf eting. 2000 dan ortiq sara kitoblar, tezkor yetkazib berish. O'qi va ko'taril!">
+  <meta name="keywords" content="kitob, kitoblar, masdar, o'zbek kitoblari, kitob do'koni, books, uzbek books">
+  <title>Masdar Kitoblari — O'qi va ko'taril</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📖</text></svg>">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/style.css?v=2">
+</head>
+<body>
+
+  <!-- ============ ANNOUNCEMENT BAR ============ -->
+  <div class="announcement-bar" id="announcement-bar">
+    <span class="announcement-bar__text" data-i18n="announcement">
+      Toshkent bo'ylab kuryer 1-2 kun · viloyatlarga 1-5 kunda yetkazib beramiz
+    </span>
+  </div>
+
+  <!-- ============ HEADER ============ -->
+  <header class="header" id="header">
+    <div class="container">
+      <!-- Hamburger (mobile) -->
+      <button class="header__hamburger" id="hamburger-btn" aria-label="Menyu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+
+      <!-- Logo -->
+      <a href="#" class="header__logo" id="logo-link">
+        <img class="header__logo-icon" src="assets/images/logo.jpg" alt="Masdar Kitoblari logosi">
+        <span class="header__logo-text">MASDAR KITOBLARI</span>
+      </a>
+
+      <!-- Navigation -->
+      <nav class="header__nav">
+        <a href="#" class="header__nav-link" id="catalog-link" data-i18n="nav.catalog">Katalog</a>
+        <a href="#" class="header__nav-link" data-i18n="nav.delivery">Yetkazib berish</a>
+      </nav>
+
+      <!-- Actions -->
+      <div class="header__actions">
+        <!-- Language Toggle -->
+        <div class="lang-toggle-pill">
+          <button class="lang-toggle-pill__btn lang-toggle-pill__btn--active" data-lang="uz" data-i18n="nav.lang.uz">Lotincha</button>
+          <button class="lang-toggle-pill__btn" data-lang="ru" data-i18n="nav.lang.ru">Rus</button>
+        </div>
+
+        <!-- Theme Toggle -->
+        <button class="theme-toggle" id="theme-toggle" aria-label="Tema almashtirish">
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+          </svg>
+        </button>
+
+        <!-- User -->
+        <button class="header__action-btn" aria-label="Foydalanuvchi" id="user-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+        </button>
+
+        <!-- Cart -->
+        <button class="header__cart-btn-white" id="cart-btn" onclick="Cart.openDrawer()">
+          <span data-i18n="nav.cart">Savat</span>
+          <span class="header__cart-count" id="cart-count" style="display:none">0</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ============ MOBILE MENU ============ -->
+  <div class="mobile-menu" id="mobile-menu">
+    <div class="mobile-menu__overlay" id="mobile-menu-overlay"></div>
+    <div class="mobile-menu__content">
+      <div class="mobile-menu__header">
+        <a href="#" class="header__logo" style="gap: 8px;">
+          <span class="header__logo-text" style="font-size: 1rem;">MASDAR</span>
+        </a>
+        <button class="mobile-menu__close" id="mobile-menu-close">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+      </div>
+      <nav class="mobile-menu__nav">
+        <a href="#" class="mobile-menu__link" id="mobile-catalog-link" data-i18n="nav.catalog">Katalog</a>
+        <a href="#" class="mobile-menu__link" data-i18n="nav.delivery">Yetkazib berish</a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- ============ MAIN CONTENT ============ -->
+  <main>
+    <!-- ==== HOME CONTENT ==== -->
+    <div class="home-content" id="home-content">
+
+      <!-- HERO -->
+      <section class="hero" id="hero-section">
+        <div class="container">
+          <div class="hero__grid">
+            <div class="hero__content">
+              <h1 class="hero__title" data-i18n="hero.title">Avval o'zingizdan boshlang</h1>
+              <p class="hero__subtitle" data-i18n="hero.subtitle">
+                3000 dan ortiq kitob. Buyurtmangizni Toshkentga bugunoq, viloyatlarga 1-5 kunda yetkazib beramiz.
+              </p>
+              <div class="hero__actions">
+                <a href="#" class="hero__cta" id="hero-cta" data-i18n="hero.cta">Bestsellerlarni ko'rish</a>
+              </div>
+            </div>
+            <div class="hero__decoration">
+              <img class="hero__image" src="assets/images/hero.jpg" alt="Masdar Kitoblari" loading="eager">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SEARCH -->
+      <section class="search-section" id="search-section">
+        <div class="container">
+          <div class="search-bar">
+            <input
+              type="text"
+              class="search-bar__input"
+              id="search-input"
+              data-i18n-placeholder="search.placeholder"
+              placeholder="Kitob yoki muallif qidirish..."
+              autocomplete="off"
+            >
+            <button class="search-bar__btn" id="search-btn" data-i18n="search.btn">Qidirish</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- CATEGORIES -->
+      <section class="categories" id="categories-section">
+        <div class="categories__scroll" id="categories-scroll">
+          <!-- Populated by JS -->
+        </div>
+      </section>
+
+      <!-- HAFTA BESTSELLERLARI -->
+      <section class="section" id="bestsellers-section">
+        <div class="container">
+          <div class="section__header">
+            <div>
+              <h2 class="section__title" data-i18n="section.bestsellers">Hafta bestsellerlari</h2>
+              <p class="section__subtitle" data-i18n="section.bestsellers.sub">Kunlik savdo asosida har kuni yangilanib boradi</p>
+            </div>
+            <a href="#" class="section__link" data-i18n="section.viewall">Barchasi →</a>
+          </div>
+          <div class="carousel" id="bestsellers-carousel">
+            <div class="carousel__track" id="bestsellers-track">
+              <!-- Populated by JS -->
+            </div>
+            <button class="carousel__btn carousel__btn--prev" data-carousel="bestsellers-track" data-dir="prev">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <button class="carousel__btn carousel__btn--next" data-carousel="bestsellers-track" data-dir="next">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 6 15 12 9 18"/></svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ENG KO'P SOTILGANLAR -->
+      <section class="section" id="most-sold-section">
+        <div class="container">
+          <div class="section__header">
+            <div>
+              <h2 class="section__title" data-i18n="section.mostsold">Eng ko'p sotilganlar</h2>
+              <p class="section__subtitle" data-i18n="section.mostsold.sub">Yillar davomida kitobxonlar eng ko'p tanlagan kitoblar</p>
+            </div>
+            <a href="#" class="section__link" data-i18n="section.viewall">Barchasi →</a>
+          </div>
+          <div class="carousel" id="most-sold-carousel">
+            <div class="carousel__track" id="mostsold-track">
+              <!-- Populated by JS -->
+            </div>
+            <button class="carousel__btn carousel__btn--prev" data-carousel="mostsold-track" data-dir="prev">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <button class="carousel__btn carousel__btn--next" data-carousel="mostsold-track" data-dir="next">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 6 15 12 9 18"/></svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- YANGI KELGANLAR -->
+      <section class="section" id="new-arrivals-section">
+        <div class="container">
+          <div class="section__header">
+            <div>
+              <h2 class="section__title" data-i18n="section.new">Yangi kelganlar</h2>
+              <p class="section__subtitle" data-i18n="section.new.sub">Katalogga endigina qo'shilgan kitoblar</p>
+            </div>
+            <a href="#" class="section__link" data-i18n="section.viewall">Barchasi →</a>
+          </div>
+          <div class="carousel" id="new-arrivals-carousel">
+            <div class="carousel__track" id="newarrivals-track">
+              <!-- Populated by JS -->
+            </div>
+            <button class="carousel__btn carousel__btn--prev" data-carousel="newarrivals-track" data-dir="prev">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <button class="carousel__btn carousel__btn--next" data-carousel="newarrivals-track" data-dir="next">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 6 15 12 9 18"/></svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- FEATURED SECTION -->
+      <section class="featured" id="featured-section">
+        <div class="container">
+          <div class="featured__grid">
+            <div class="featured__text-block">
+              <span class="featured__label" data-i18n="featured.label">MASDAR TANLOVI</span>
+              <h2 class="featured__title" data-i18n="featured.title">O'zligingizni kitoblar bilan boyiting</h2>
+              <p class="featured__desc" data-i18n="featured.desc">
+                2000 dan ortiq sara kitoblar orasidan o'zingizga mosini toping va yangi bosqichni bugun boshlang.
+              </p>
+              <a href="#" class="featured__cta" id="featured-cta" data-i18n="featured.cta">Kitoblarni ko'rish</a>
+            </div>
+            <div class="featured__image-block">
+              <img class="featured__image" src="assets/images/hero.jpg" alt="Kitob o'qiyotgan shaxs" loading="lazy">
+              <div class="featured__image-overlay">
+                <h3 class="featured__image-title" data-i18n="featured.side.title">O'zligingizni bizda toping</h3>
+                <div class="featured__image-line"></div>
+                <p class="featured__image-desc" data-i18n="featured.side.desc">
+                  2000 dan ortiq sara kitoblar bilan o'z dunyongizni boyiting va bugun o'zgarishni boshlang.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- JAHON ADABIYOTI -->
+      <section class="section" id="world-lit-section">
+        <div class="container">
+          <div class="section__header">
+            <div>
+              <span class="section__label" data-i18n="section.worldlit.label">TAVSIYA ETAMIZ</span>
+              <h2 class="section__title" data-i18n="section.worldlit">Jahon adabiyoti</h2>
+            </div>
+            <a href="#" class="section__link" data-i18n="section.viewall">Barchasi →</a>
+          </div>
+          <div class="carousel">
+            <div class="carousel__track" id="worldlit-track"></div>
+            <button class="carousel__btn carousel__btn--prev" data-carousel="worldlit-track" data-dir="prev">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <button class="carousel__btn carousel__btn--next" data-carousel="worldlit-track" data-dir="next">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 6 15 12 9 18"/></svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- DINIY-MA'RIFIY -->
+      <section class="section" id="religious-section">
+        <div class="container">
+          <div class="section__header">
+            <div>
+              <span class="section__label" data-i18n="section.religious.label">TAVSIYA ETAMIZ</span>
+              <h2 class="section__title" data-i18n="section.religious">Diniy-ma'rifiy</h2>
+            </div>
+            <a href="#" class="section__link" data-i18n="section.viewall">Barchasi →</a>
+          </div>
+          <div class="carousel">
+            <div class="carousel__track" id="religious-track"></div>
+            <button class="carousel__btn carousel__btn--prev" data-carousel="religious-track" data-dir="prev">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <button class="carousel__btn carousel__btn--next" data-carousel="religious-track" data-dir="next">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 6 15 12 9 18"/></svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- BADIIY BO'LMAGAN -->
+      <section class="section" id="nonfiction-section">
+        <div class="container">
+          <div class="section__header">
+            <div>
+              <span class="section__label" data-i18n="section.nonfiction.label">TAVSIYA ETAMIZ</span>
+              <h2 class="section__title" data-i18n="section.nonfiction">Badiiy bo'lmagan</h2>
+            </div>
+            <a href="#" class="section__link" data-i18n="section.viewall">Barchasi →</a>
+          </div>
+          <div class="carousel">
+            <div class="carousel__track" id="nonfiction-track"></div>
+            <button class="carousel__btn carousel__btn--prev" data-carousel="nonfiction-track" data-dir="prev">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <button class="carousel__btn carousel__btn--next" data-carousel="nonfiction-track" data-dir="next">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 6 15 12 9 18"/></svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- O'ZBEK ADABIYOTI -->
+      <section class="section" id="uzbeklit-section">
+        <div class="container">
+          <div class="section__header">
+            <div>
+              <span class="section__label" data-i18n="section.uzbeklit.label">TAVSIYA ETAMIZ</span>
+              <h2 class="section__title" data-i18n="section.uzbeklit">O'zbek adabiyoti</h2>
+            </div>
+            <a href="#" class="section__link" data-i18n="section.viewall">Barchasi →</a>
+          </div>
+          <div class="carousel">
+            <div class="carousel__track" id="uzbeklit-track"></div>
+            <button class="carousel__btn carousel__btn--prev" data-carousel="uzbeklit-track" data-dir="prev">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <button class="carousel__btn carousel__btn--next" data-carousel="uzbeklit-track" data-dir="next">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 6 15 12 9 18"/></svg>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- INFO CARDS -->
+      <section class="info-cards" id="info-cards">
+        <div class="container">
+          <div class="info-cards__grid">
+            <div class="info-card">
+              <div class="info-card__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+                  <circle cx="12" cy="10" r="3"/>
+                </svg>
+              </div>
+              <h3 class="info-card__title" data-i18n="info.pickup.title">Bugunoq olib keting</h3>
+              <p class="info-card__desc" data-i18n="info.pickup.desc">Toshkentda do'konimizga tashrif buyuring</p>
+            </div>
+            <div class="info-card">
+              <div class="info-card__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="1" y="3" width="15" height="13"/>
+                  <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+                  <circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
+                </svg>
+              </div>
+              <h3 class="info-card__title" data-i18n="info.delivery.title">Yetkazib berish</h3>
+              <p class="info-card__desc" data-i18n="info.delivery.desc">Toshkent bo'ylab kuryer, viloyatlarga pochta orqali</p>
+            </div>
+            <div class="info-card">
+              <div class="info-card__icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+                  <line x1="1" y1="10" x2="23" y2="10"/>
+                </svg>
+              </div>
+              <h3 class="info-card__title" data-i18n="info.payment.title">Qulay to'lov</h3>
+              <p class="info-card__desc" data-i18n="info.payment.desc">Naqd, Click yoki Payme — o'zingizga qulayini tanlang</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div><!-- /.home-content -->
+
+    <!-- ==== CATALOG VIEW ==== -->
+    <section class="catalog" id="catalog-section">
+      <div class="container">
+        <h2 class="catalog__title" data-i18n="catalog.title">Barcha kitoblar</h2>
+
+        <div class="catalog__filters" id="catalog-filters">
+          <!-- Sort -->
+          <div class="catalog__filter-group">
+            <span class="catalog__filter-label" data-i18n="catalog.sort">Saralash:</span>
+            <button class="catalog__filter-tag catalog__filter-tag--active" data-filter="sort" data-value="ommabop" data-i18n="catalog.sort.popular">Ommabop</button>
+            <button class="catalog__filter-tag" data-filter="sort" data-value="yangi" data-i18n="catalog.sort.new">Yangi</button>
+            <button class="catalog__filter-tag" data-filter="sort" data-value="arzon" data-i18n="catalog.sort.cheap">Arzon</button>
+            <button class="catalog__filter-tag" data-filter="sort" data-value="qimmat" data-i18n="catalog.sort.expensive">Qimmat</button>
+          </div>
+
+          <!-- Price -->
+          <div class="catalog__filter-group">
+            <span class="catalog__filter-label" data-i18n="catalog.price">Narx:</span>
+            <button class="catalog__filter-tag catalog__filter-tag--active" data-filter="price" data-value="all" data-i18n="catalog.price.all">Hammasi</button>
+            <button class="catalog__filter-tag" data-filter="price" data-value="0-50" data-i18n="catalog.price.50">50 minggacha</button>
+            <button class="catalog__filter-tag" data-filter="price" data-value="50-100" data-i18n="catalog.price.50-100">50-100 ming</button>
+            <button class="catalog__filter-tag" data-filter="price" data-value="100-200" data-i18n="catalog.price.100-200">100-200 ming</button>
+            <button class="catalog__filter-tag" data-filter="price" data-value="200+" data-i18n="catalog.price.200">200 mingdan yuqori</button>
+          </div>
+
+          <!-- Cover -->
+          <div class="catalog__filter-group">
+            <span class="catalog__filter-label" data-i18n="catalog.cover">Muqova:</span>
+            <button class="catalog__filter-tag catalog__filter-tag--active" data-filter="cover" data-value="hammasi" data-i18n="catalog.cover.all">Hammasi</button>
+            <button class="catalog__filter-tag" data-filter="cover" data-value="hardcover" data-i18n="catalog.cover.hard">Qattiq muqova</button>
+            <button class="catalog__filter-tag" data-filter="cover" data-value="softcover" data-i18n="catalog.cover.soft">Yumshoq muqova</button>
+          </div>
+
+          <!-- Publisher -->
+          <div class="catalog__filter-group" id="publisher-filters">
+            <span class="catalog__filter-label" data-i18n="catalog.publisher">Nashriyot:</span>
+            <!-- Populated by JS -->
+          </div>
+        </div>
+
+        <div class="catalog__grid" id="catalog-grid">
+          <!-- Populated by JS -->
+        </div>
+
+        <div class="catalog__pagination" id="catalog-pagination">
+          <button class="catalog__page-btn" id="catalog-prev" data-i18n="catalog.prev">← Oldingi</button>
+          <span class="catalog__page-info" id="catalog-page-info">1 / 1</span>
+          <button class="catalog__page-btn" id="catalog-next" data-i18n="catalog.next">Keyingi →</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PROFILE VIEW ============ -->
+    <section class="profile-view" id="profile-view" style="display: none;">
+      <div class="container" style="max-width: 600px; margin: 0 auto; text-align: center; padding: 6rem 0;">
+        <h2 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-primary);">Shaxsiy kabinet</h2>
+        <p style="font-size: 1rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 2.5rem;">
+          Buyurtmalaringiz, keshbek balansingiz va yetkazish manzilingiz - hammasi bir joyda. Kirish uchun Telegram hisobingizdan foydalaning.
+        </p>
+
+        <!-- Telegram Widget Container -->
+        <div id="telegram-login-container" style="display: flex; justify-content: center; margin-bottom: 2rem; min-height: 48px;">
+          <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="masdar_kitoblari_bot" data-size="large" data-onauth="onTelegramAuth(user)" data-request-access="write"></script>
+        </div>
+
+        <p style="font-size: 0.85rem; color: var(--text-secondary);">
+          Kirish orqali siz <a href="#" style="color: var(--text-primary); text-decoration: underline;">maxfiylik siyosatiga</a> rozilik bildirasiz.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer" id="footer">
+    <div class="container">
+      <div class="footer__grid">
+        <!-- Brand -->
+        <div>
+          <div class="footer__logo">
+            <img class="footer__logo-icon" src="assets/images/logo.jpg" alt="Masdar Kitoblari logosi">
+            <span class="header__logo-text" style="font-size: 1rem;">MASDAR KITOBLARI</span>
+          </div>
+          <p class="footer__tagline" data-i18n="footer.tagline">O'qi va ko'taril</p>
+          <p class="footer__about" data-i18n="footer.about">
+            Masdar Kitoblari — bilim manbasini kashf eting. Sifatli kitoblar, tezkor yetkazib berish.
+          </p>
+          <div class="footer__social">
+            <a href="https://t.me/masdar_books" target="_blank" class="footer__social-link" aria-label="Telegram">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+            </a>
+            <a href="https://instagram.com/masdar_kitoblari" target="_blank" class="footer__social-link" aria-label="Instagram">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+            </a>
+            <a href="#" class="footer__social-link" aria-label="Facebook">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Store -->
+        <div>
+          <h4 class="footer__title" data-i18n="footer.stores">DO'KONIMIZ</h4>
+          <p class="footer__text" data-i18n="footer.store.address">Toshkent kitob markazi</p>
+          <p class="footer__text" data-i18n="footer.store.hours">Ish vaqti: 09:00 — 21:00</p>
+          <a href="#" class="footer__link" data-i18n="footer.store.map">Xaritada ko'rish</a>
+          <a href="#" class="footer__link" data-i18n="footer.delivery.info">Yetkazib berish va qaytarish</a>
+        </div>
+
+        <!-- Contact -->
+        <div>
+          <h4 class="footer__title" data-i18n="footer.contact">ALOQA</h4>
+          <p class="footer__text" data-i18n="footer.contact.online">Online yordam — darhol javob beramiz</p>
+          <p class="footer__text" data-i18n="footer.contact.phone">+998 99 123-45-67</p>
+          <a href="https://t.me/masdar_books" target="_blank" class="footer__link" data-i18n="footer.contact.telegram">Telegram kanal — @masdar_books</a>
+          <a href="#" class="footer__link" data-i18n="footer.contact.delivery">Yetkazish xizmati — @masdar_delivery</a>
+        </div>
+
+        <!-- Links -->
+        <div>
+          <h4 class="footer__title" data-i18n="footer.links">FOYDALI</h4>
+          <a href="#" class="footer__link" data-i18n="footer.links.about">Biz haqimizda</a>
+          <a href="#" class="footer__link" data-i18n="footer.links.faq">Savol-javob</a>
+          <a href="#" class="footer__link" data-i18n="footer.links.offer">Ommaviy oferta</a>
+          <a href="#" class="footer__link" data-i18n="footer.links.privacy">Maxfiylik</a>
+          <a href="#" class="footer__link" data-i18n="footer.links.careers">Bizga qo'shiling</a>
+        </div>
+      </div>
+
+      <div class="footer__bottom">
+        <p data-i18n="footer.copyright">© 2024 Masdar Kitoblari. Barcha huquqlar himoyalangan.</p>
+      </div>
+  <!-- ============ CART DRAWER ============ -->
+  <div class="cart-overlay" id="cart-overlay" onclick="Cart.closeDrawer()"></div>
+  <div class="cart-drawer" id="cart-drawer">
+    <div class="cart-drawer__header">
+      <h3 class="cart-drawer__title" data-i18n="cart.title">Savat</h3>
+      <button class="cart-drawer__close" onclick="Cart.closeDrawer()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+    <div class="cart-drawer__items" id="cart-items">
+      <!-- Populated by JS -->
+    </div>
+    <div class="cart-drawer__footer">
+      <div class="cart-drawer__total">
+        <span class="cart-drawer__total-label" data-i18n="cart.total">Jami:</span>
+        <span class="cart-drawer__total-amount" id="cart-total-amount">0 so'm</span>
+      </div>
+      <button class="cart-drawer__checkout" data-i18n="cart.checkout">Buyurtma berish</button>
+    </div>
+  </div>
+
+  <!-- ============ SCRIPTS ============ -->
+  <script src="js/books.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/auth.js?v=4"></script>
+  <script src="js/app.js?v=4"></script>
+
+</body>
+</html>
