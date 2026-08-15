@@ -118,7 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
         author: document.getElementById('author').value,
         price: parseInt(document.getElementById('price').value),
         coverImage: coverUrl,
-        category: "badiiy",
+        category: document.getElementById('category').value,
         isBestseller: false,
         year: 2024,
         createdAt: firebase.firestore.FieldValue.serverTimestamp()
