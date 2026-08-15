@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Panel | Masdar Kitoblari</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .admin-container { max-width: 1200px; margin: 2rem auto; padding: 0 1rem; }
+    .admin-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+    .admin-table { width: 100%; border-collapse: collapse; margin-bottom: 2rem; }
+    .admin-table th, .admin-table td { border: 1px solid var(--border-color); padding: 1rem; text-align: left; }
+    .admin-table th { background: var(--bg-secondary); }
+    .btn-action { padding: 0.5rem 1rem; border: none; border-radius: 4px; cursor: pointer; color: white; }
+    .btn-edit { background: var(--accent-color); }
+    .btn-delete { background: #ff4d4f; }
+    .admin-form { background: var(--bg-secondary); padding: 2rem; border-radius: 8px; }
+    .form-group { margin-bottom: 1rem; }
+    .form-group label { display: block; margin-bottom: 0.5rem; }
+    .form-group input, .form-group textarea { width: 100%; padding: 0.5rem; border: 1px solid var(--border-color); border-radius: 4px; background: var(--bg-primary); color: var(--text-primary); }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <div class="header__inner">
+        <a href="index.html" class="header__logo">MASDAR ADMIN</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="admin-container" id="admin-main" style="display: none;">
+    <div class="admin-header">
+      <h2>Kitoblar ro'yxati</h2>
+      <div>
+        <button id="import-btn" class="btn-action" style="background: #52c41a;">Barcha kitoblarni bazaga yuklash</button>
+      </div>
+    </div>
+
+    <table class="admin-table">
+      <thead>
+        <tr>
+          <th>Rasm</th>
+          <th>Nom</th>
+          <th>Muallif</th>
+          <th>Narx</th>
+          <th>Amallar</th>
+        </tr>
+      </thead>
+      <tbody id="admin-books-list">
+        <!-- Populated by JS -->
+      </tbody>
+    </table>
+
+    <div class="admin-form">
+      <h3>Yangi kitob qo'shish</h3>
+      <form id="add-book-form">
+        <div class="form-group">
+          <label>Nomi (O'zbekcha)</label>
+          <input type="text" id="title_uz" required>
+        </div>
+        <div class="form-group">
+          <label>Muallif</label>
+          <input type="text" id="author" required>
+        </div>
+        <div class="form-group">
+          <label>Narx (so'm)</label>
+          <input type="number" id="price" required>
+        </div>
+        <div class="form-group">
+          <label>Muqova rasm URL (masalan: assets/images/book_1.jpg)</label>
+          <input type="text" id="cover" required>
+        </div>
+        <button type="submit" class="btn-action" style="background: var(--accent-color);">Saqlash</button>
+      </form>
+    </div>
+  </main>
+
+  <section class="profile-view" id="admin-login-view">
+    <div class="container" style="text-align: center; padding: 6rem 0;">
+      <h2>Admin Panelga Kirish</h2>
+      <div id="telegram-login-container" style="display: flex; justify-content: center; margin-top: 2rem;">
+        <button id="custom-tg-login-btn" style="background-color: #2AABEE; color: white; border: none; border-radius: 50px; padding: 12px 32px; font-size: 1rem; cursor: pointer;">
+          Telegram bilan kirish
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script src="js/firebase-init.js"></script>
+  
+  <script src="https://telegram.org/js/telegram-widget.js?22"></script>
+  <script src="js/books.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
