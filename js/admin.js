@@ -80,17 +80,37 @@ document.addEventListener('DOMContentLoaded', () => {
       const file = fileInput.files[0];
       let coverUrl = "";
 
-      if (file) {
-        const storageRef = storage.ref();
-        const fileRef = storageRef.child('covers/' + Date.now() + '_' + file.name);
-        await fileRef.put(file);
-        coverUrl = await fileRef.getDownloadURL();
-      } else {
+      if (!file) {
         alert("Iltimos, rasm tanlang!");
         btn.textContent = oldText;
         btn.disabled = false;
         return;
       }
+
+      // Convert image to base64 with compression (to fit in Firestore limit)
+      coverUrl = await new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          const img = new Image();
+          img.onload = () => {
+            const canvas = document.createElement('canvas');
+            const MAX_WIDTH = 600;
+            const scaleSize = MAX_WIDTH / img.width;
+            canvas.width = MAX_WIDTH;
+            canvas.height = img.height * scaleSize;
+            
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+            
+            // Compress to JPEG with 0.7 quality
+            resolve(canvas.toDataURL('image/jpeg', 0.7));
+          };
+          img.onerror = reject;
+          img.src = e.target.result;
+        };
+        reader.onerror = reject;
+        reader.readAsDataURL(file);
+      });
 
       const newBook = {
         title: {
