@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
       })
       .catch((error) => {
         console.error("Login failed:", error.message);
-        alert("Kirishda xatolik: Email yoki parol noto'g'ri!");
+        alert("Xatolik: " + error.message);
       });
   });
 
