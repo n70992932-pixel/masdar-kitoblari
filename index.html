@@ -440,9 +440,15 @@
           Buyurtmalaringiz, keshbek balansingiz va yetkazish manzilingiz - hammasi bir joyda. Kirish uchun Telegram hisobingizdan foydalaning.
         </p>
 
-        <!-- Telegram Widget Container -->
-        <div id="telegram-login-container" style="display: flex; justify-content: center; margin-bottom: 2rem; min-height: 48px;">
-          <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-login="masdar_kitoblari_bot" data-size="large" data-onauth="onTelegramAuth(user)" data-request-access="write"></script>
+        <!-- Telegram Custom Button -->
+        <div id="telegram-login-container" style="display: flex; justify-content: center; margin-bottom: 2rem;">
+          <button id="custom-tg-login-btn" style="background-color: #2AABEE; color: white; border: none; border-radius: 50px; padding: 12px 32px; font-size: 1rem; font-weight: 600; display: flex; align-items: center; gap: 10px; cursor: pointer; font-family: inherit; transition: opacity 0.2s;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 24C18.6274 24 24 18.6274 24 12C24 5.37258 18.6274 0 12 0C5.37258 0 0 5.37258 0 12C0 18.6274 5.37258 24 12 24Z" fill="#2AABEE"/>
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M5.42533 11.8705C9.71261 10.0033 12.5714 8.77252 14.0016 8.1783C18.086 6.48057 18.9351 6.18529 19.4883 6.17548C19.61 6.17332 19.882 6.20336 20.0601 6.34759C20.2105 6.46937 20.2526 6.63378 20.2721 6.74903C20.2915 6.86429 20.3157 7.12711 20.2964 7.33306C20.0763 9.68264 19.1245 15.292 18.636 17.8863C18.4293 18.9831 18.0249 19.352 17.6332 19.3882C16.7816 19.4669 16.1349 18.8267 15.3093 18.2854C14.0182 17.4391 13.292 16.9103 12.0396 16.0847C10.5921 15.1306 11.5298 14.6063 12.3551 13.7499C12.5713 13.5255 16.3262 10.1136 16.3989 9.8037C16.408 9.76495 16.4164 9.6206 16.3312 9.54483C16.246 9.46907 16.1197 9.49503 16.0278 9.51586C15.8977 9.54532 13.8213 10.9168 9.79869 13.6304C9.20894 14.0353 8.67503 14.2335 8.19696 14.2234C7.67027 14.2123 6.6575 13.926 5.90425 13.6811C4.98048 13.3807 4.24683 13.2144 4.31067 12.7042C4.34394 12.4385 4.71556 12.1611 5.42533 11.8705Z" fill="white"/>
+            </svg>
+            Telegram bilan kirish
+          </button>
         </div>
 
         <p style="font-size: 0.85rem; color: var(--text-secondary);">
@@ -536,6 +542,7 @@
   </div>
 
   <!-- ============ SCRIPTS ============ -->
+  <script async src="https://telegram.org/js/telegram-widget.js?22"></script>
   <script src="js/books.js"></script>
   <script src="js/i18n.js"></script>
   <script src="js/cart.js"></script>

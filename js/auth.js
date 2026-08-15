@@ -36,6 +36,23 @@ const Auth = {
         this.openProfileView();
       }
     });
+
+    // Custom Telegram Login Button
+    const customTgBtn = document.getElementById('custom-tg-login-btn');
+    customTgBtn?.addEventListener('click', () => {
+      if (window.Telegram && window.Telegram.Login) {
+        window.Telegram.Login.auth({
+          bot_id: '8157364100',
+          request_access: 'write'
+        }, (data) => {
+          if (data) {
+            window.onTelegramAuth(data);
+          }
+        });
+      } else {
+        alert("Telegram vidjeti yuklanmadi, iltimos sahifani yangilang.");
+      }
+    });
   },
 
   openProfileView() {
