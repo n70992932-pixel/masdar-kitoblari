@@ -572,6 +572,19 @@
     </form>
   </div>
 
+  <!-- ============ SUCCESS MODAL ============ -->
+  <div class="success-overlay" id="success-overlay" onclick="Cart.closeSuccess()"></div>
+  <div class="success-modal" id="success-modal">
+    <div class="success-icon">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+    </div>
+    <h3>Muvaffaqiyatli!</h3>
+    <p>Buyurtmangiz qabul qilindi. Tez orada siz bilan bog'lanamiz.</p>
+    <button onclick="Cart.closeSuccess()" class="btn-success-close">Yopish</button>
+  </div>
+
   <!-- ============ SCRIPTS ============ -->
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>

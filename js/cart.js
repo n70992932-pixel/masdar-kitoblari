@@ -245,11 +245,11 @@ const Cart = {
         })
       });
       if (res.ok) {
-        alert("Buyurtmangiz muvaffaqiyatli qabul qilindi! Tez orada siz bilan bog'lanamiz.");
         this.items = [];
         this.save();
         this.updateUI();
         this.closeCheckout();
+        this.openSuccess();
       } else {
         alert("Xatolik yuz berdi. Iltimos qaytadan urinib ko'ring.");
       }
@@ -260,6 +260,20 @@ const Cart = {
       btn.disabled = false;
       btn.textContent = 'Tasdiqlash va Buyurtma berish';
     }
+  },
+
+  openSuccess() {
+    const modal = document.getElementById('success-modal');
+    const overlay = document.getElementById('success-overlay');
+    if (modal) modal.classList.add('active');
+    if (overlay) overlay.classList.add('active');
+  },
+
+  closeSuccess() {
+    const modal = document.getElementById('success-modal');
+    const overlay = document.getElementById('success-overlay');
+    if (modal) modal.classList.remove('active');
+    if (overlay) overlay.classList.remove('active');
   }
 };
 
