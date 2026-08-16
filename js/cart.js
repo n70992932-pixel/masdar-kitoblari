@@ -174,4 +174,99 @@ const Cart = {
     if (overlay) overlay.classList.remove('cart-overlay--active');
     document.body.style.overflow = '';
   },
+
+  // Checkout Methods
+  openCheckout() {
+    if (this.items.length === 0) {
+      alert("Savat bo'sh!");
+      return;
+    }
+    this.closeDrawer();
+    const modal = document.getElementById('checkout-modal');
+    const overlay = document.getElementById('checkout-overlay');
+    if (modal) modal.classList.add('active');
+    if (overlay) overlay.classList.add('active');
+  },
+
+  closeCheckout() {
+    const modal = document.getElementById('checkout-modal');
+    const overlay = document.getElementById('checkout-overlay');
+    if (modal) modal.classList.remove('active');
+    if (overlay) overlay.classList.remove('active');
+  },
+
+  toggleDeliveryFields() {
+    const delivery = document.getElementById('checkout-delivery').value;
+    const addressGroup = document.getElementById('checkout-address-group');
+    const addressInput = document.getElementById('checkout-address');
+    if (delivery === 'olib-ketish') {
+      addressGroup.style.display = 'none';
+      addressInput.required = false;
+    } else {
+      addressGroup.style.display = 'block';
+      addressInput.required = true;
+    }
+  },
+
+  async submitCheckout(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('button[type="submit"]');
+    btn.disabled = true;
+    btn.textContent = 'Yuborilmoqda...';
+
+    const name = document.getElementById('checkout-name').value;
+    const phone = document.getElementById('checkout-phone').value;
+    const delivery = document.getElementById('checkout-delivery').value;
+    const address = document.getElementById('checkout-address').value;
+
+    let itemsText = '';
+    this.items.forEach((item, index) => {
+      const book = getBookById(item.bookId);
+      const title = book ? (typeof book.title === 'object' && book.title !== null ? (book.title.uz || book.title.ru) : book.title) : 'Noma\'lum kitob';
+      itemsText += `${index + 1}. ${title} x ${item.quantity} ta\n`;
+    });
+
+    const total = this.getTotal().toLocaleString('ru-RU');
+
+    const text = `📦 Yangi Buyurtma!\n\n👤 Ism: ${name}\n📞 Tel: ${phone}\n🚚 Yetkazish turi: ${delivery}\n📍 Manzil: ${delivery === 'olib-ketish' ? "Do'kondan olib ketish" : address}\n\n📚 Kitoblar:\n${itemsText}\n💰 Jami: ${total} so'm`;
+
+    const BOT_TOKEN = '8157364100:AAFSVUaDT8V5b1RqDaTtmzQURNkqC0z1UC4';
+    const CHAT_ID = '6883047494';
+
+    try {
+      const res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          chat_id: CHAT_ID,
+          text: text
+        })
+      });
+      if (res.ok) {
+        alert("Buyurtmangiz muvaffaqiyatli qabul qilindi! Tez orada siz bilan bog'lanamiz.");
+        this.items = [];
+        this.save();
+        this.updateUI();
+        this.closeCheckout();
+      } else {
+        alert("Xatolik yuz berdi. Iltimos qaytadan urinib ko'ring.");
+      }
+    } catch (err) {
+      console.error(err);
+      alert("Xatolik yuz berdi. Iltimos qaytadan urinib ko'ring.");
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Tasdiqlash va Buyurtma berish';
+    }
+  }
 };
+
+// Bind form submission
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('checkout-form');
+  if (form) {
+    form.addEventListener('submit', (e) => Cart.submitCheckout(e));
+  }
+});
