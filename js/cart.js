@@ -231,7 +231,7 @@ const Cart = {
     const text = `📦 Yangi Buyurtma!\n\n👤 Ism: ${name}\n📞 Tel: ${phone}\n🚚 Yetkazish turi: ${delivery}\n📍 Manzil: ${delivery === 'olib-ketish' ? "Do'kondan olib ketish" : address}\n\n📚 Kitoblar:\n${itemsText}\n💰 Jami: ${total} so'm`;
 
     const BOT_TOKEN = '8157364100:AAFSVUaDT8V5b1RqDaTtmzQURNkqC0z1UC4';
-    const CHAT_ID = '-1003924291293';
+    const CHAT_ID = '-1004413164335';
 
     try {
       const res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
