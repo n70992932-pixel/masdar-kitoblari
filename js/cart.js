@@ -87,6 +87,12 @@ const Cart = {
     if (totalEl) {
       totalEl.textContent = formatPrice(this.getTotal());
     }
+
+    // Show/hide footer based on cart empty state
+    const footer = document.querySelector('.cart-drawer__footer');
+    if (footer) {
+      footer.style.display = this.items.length > 0 ? 'block' : 'none';
+    }
   },
 
   renderDrawerItems() {
