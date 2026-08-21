@@ -2398,6 +2398,25 @@ body {
     width: 100%; /* Fill grid cell */
     min-width: 0;
   }
+  .book-card__body {
+    padding: 8px;
+  }
+  .book-card__title {
+    font-size: 0.85rem;
+    -webkit-line-clamp: 2;
+  }
+  .book-card__author {
+    font-size: 0.75rem;
+    margin-bottom: 6px;
+  }
+  .book-card__price {
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+  }
+  .book-card__btn {
+    padding: 8px;
+  }
+
   .catalog__grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 12px;
