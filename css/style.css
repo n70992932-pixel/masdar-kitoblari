@@ -2427,3 +2427,39 @@ body {
     font-size: 0.8rem;
   }
 }
+
+/* =============================================
+   MOBILE OVERFLOW FIXES
+   ============================================= */
+html, body {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .header__logo-text {
+    display: none;
+  }
+  
+  .featured__text-block {
+    padding: 24px 16px;
+    margin: 0;
+  }
+  
+  .featured__grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  
+  .featured__image-block {
+    min-height: 200px;
+  }
+  
+  .featured__image-title {
+    font-size: 1.5rem;
+  }
+  
+  .featured__image-desc {
+    font-size: 0.85rem;
+  }
+}
