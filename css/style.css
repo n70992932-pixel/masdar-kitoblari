@@ -2471,3 +2471,59 @@ html, body {
     font-size: 0.85rem;
   }
 }
+
+/* =============================================
+   ASAXIY STYLE MOBILE LAYOUT
+   ============================================= */
+@media (max-width: 768px) {
+  /* Disable horizontal scroll carousels, make them 2-column grids */
+  .carousel__track {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
+    overflow-x: visible !important;
+    flex-wrap: wrap !important;
+    padding: 0 16px !important;
+  }
+  
+  .carousel__track .book-card {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+  
+  /* Make sure container sections have no padding if grid has padding */
+  .section {
+    padding: 24px 0 !important;
+  }
+  
+  /* Hide carousel arrows on mobile completely */
+  .carousel__btn {
+    display: none !important;
+  }
+  
+  /* Make all book cards have Asaxiy-style padding */
+  .book-card {
+    background: #1e1e1e !important; 
+    border-radius: 8px !important;
+    padding: 8px !important;
+    border: none !important;
+  }
+  .book-card__body {
+    padding: 8px 0 0 0 !important;
+  }
+  .book-card__title {
+    font-size: 0.85rem !important;
+  }
+  .book-card__author {
+    font-size: 0.75rem !important;
+  }
+  .book-card__price {
+    font-size: 0.95rem !important;
+  }
+  .book-card__btn {
+    background: #FFB000 !important; /* Asaxiy/Premium Yellow-Gold */
+    color: #000 !important;
+    border-radius: 6px !important;
+    padding: 8px !important;
+  }
+}
