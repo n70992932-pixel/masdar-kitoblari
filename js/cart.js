@@ -73,10 +73,16 @@ const Cart = {
   updateUI() {
     // Update cart count badge
     const countEl = document.getElementById('cart-count');
+    const bottomCountEl = document.getElementById('bottom-cart-count');
     if (countEl) {
       const count = this.getItemCount();
       countEl.textContent = count;
       countEl.style.display = count > 0 ? 'flex' : 'none';
+      
+      if (bottomCountEl) {
+        bottomCountEl.textContent = count;
+        bottomCountEl.style.display = count > 0 ? 'flex' : 'none';
+      }
     }
 
     // Update cart drawer items
