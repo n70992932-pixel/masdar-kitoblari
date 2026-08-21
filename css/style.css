@@ -2241,3 +2241,189 @@ img {
 .book-card:nth-child(4) { animation-delay: 150ms; }
 .book-card:nth-child(5) { animation-delay: 200ms; }
 .book-card:nth-child(6) { animation-delay: 250ms; }
+
+/* =============================================
+   PREMIUM DESIGN OVERRIDES
+   ============================================= */
+
+/* Base Typography & Colors */
+:root {
+  --color-primary: #3B82F6; /* Modern Blue */
+  --color-primary-dark: #2563EB;
+}
+
+[data-theme="dark"] {
+  --color-bg: #0F172A; /* Slate 900 */
+  --color-surface: #1E293B; /* Slate 800 */
+  --color-border: #334155;
+  --color-primary: #3B82F6;
+}
+
+body {
+  background-color: var(--color-bg);
+}
+
+/* Book Cards */
+.book-card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  height: 100%;
+}
+
+.book-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+  border-color: var(--color-primary);
+}
+
+.book-card__cover {
+  width: 100%;
+  aspect-ratio: 2 / 3 !important; /* Perfect book ratio */
+  position: relative;
+  border-radius: 0;
+  box-shadow: none;
+  margin-bottom: 0;
+  background: #f1f5f9;
+}
+[data-theme="dark"] .book-card__cover {
+  background: #0f172a;
+}
+
+.book-card__cover-art {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  padding: 0;
+}
+
+.book-card__body {
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.book-card__title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 4px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  color: var(--color-text);
+}
+
+.book-card__author {
+  font-size: 0.8rem;
+  color: var(--color-text-muted);
+  margin-bottom: 8px;
+}
+
+.book-card__price {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin-top: auto;
+  margin-bottom: 12px;
+}
+
+.book-card__btn {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  background: var(--color-primary);
+  color: white;
+  border: none;
+  font-weight: 600;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: background 0.2s;
+}
+.book-card__btn:hover {
+  background: var(--color-primary-dark);
+}
+
+/* Add Cart Icon to button and hide text on mobile */
+.book-card__btn::before {
+  content: '';
+  display: inline-block;
+  width: 16px; height: 16px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='white' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+/* Category Pills */
+.category-chip {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  border-radius: 99px;
+  padding: 8px 16px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+.category-chip:hover {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+.category-chip.active {
+  background: var(--color-primary);
+  border-color: var(--color-primary);
+  color: white;
+}
+
+/* Search Bar */
+.search-bar {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+.search-bar__input {
+  background: transparent;
+}
+.search-bar__btn {
+  background: var(--color-primary);
+  border-radius: 8px;
+  margin: 4px;
+}
+
+/* Header */
+.header {
+  background: rgba(var(--color-surface-rgb), 0.95) !important;
+  backdrop-filter: blur(8px);
+}
+
+@media (max-width: 768px) {
+  .book-card {
+    width: 100%; /* Fill grid cell */
+    min-width: 0;
+  }
+  .catalog__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    padding: 0 16px;
+  }
+  .books-scroll-track .book-card {
+    width: 140px;
+    min-width: 140px;
+  }
+  .book-card__cover {
+    height: auto; /* rely on aspect ratio */
+  }
+  
+  /* Make button just an icon on very small screens if needed, but text is fine if it fits */
+  .book-card__btn span {
+    font-size: 0.8rem;
+  }
+}
