@@ -2403,7 +2403,7 @@ body {
     gap: 12px;
     padding: 0 16px;
   }
-  .books-scroll-track .book-card {
+  .carousel__track .book-card {
     width: 140px;
     min-width: 140px;
   }
