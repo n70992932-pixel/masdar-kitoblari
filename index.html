@@ -16,7 +16,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <!-- CSS -->
-  <link rel="stylesheet" href="css/style.css?v=12">
+  <link rel="stylesheet" href="css/style.css?v=13">
 </head>
 <body>
 
@@ -99,28 +99,35 @@
 
   <!-- ============ MAIN CONTENT ============ -->
   <main>
-    <!-- ==== HOME CONTENT ==== -->
-    <div class="home-content" id="home-content">
-
-      <!-- HERO -->
-      <section class="hero" id="hero-section">
+      <!-- FEATURED SECTION -->
+      <section class="featured" id="featured-section">
         <div class="container">
-          <div class="hero__grid">
-            <div class="hero__content">
-              <h1 class="hero__title" data-i18n="hero.title">Avval o'zingizdan boshlang</h1>
-              <p class="hero__subtitle" data-i18n="hero.subtitle">
-                3000 dan ortiq kitob. Buyurtmangizni Toshkentga bugunoq, viloyatlarga 1-5 kunda yetkazib beramiz.
+          <div class="featured__grid">
+            <div class="featured__text-block">
+              <span class="featured__label" data-i18n="featured.label">MASDAR TANLOVI</span>
+              <h2 class="featured__title" data-i18n="featured.title">O'zligingizni kitoblar bilan boyiting</h2>
+              <p class="featured__desc" data-i18n="featured.desc">
+                2000 dan ortiq sara kitoblar orasidan o'zingizga mosini toping va yangi bosqichni bugun boshlang.
               </p>
-              <div class="hero__actions">
-                <a href="#" class="hero__cta" id="hero-cta" data-i18n="hero.cta">Bestsellerlarni ko'rish</a>
-              </div>
+              <a href="#" class="featured__cta" id="featured-cta" data-i18n="featured.cta">Kitoblarni ko'rish</a>
             </div>
-            <div class="hero__decoration">
-              <img class="hero__image" src="assets/images/hero.jpg" alt="Masdar Kitoblari" loading="eager">
+            <div class="featured__image-block">
+              <img class="featured__image" src="assets/images/hero.jpg" alt="Kitob o'qiyotgan shaxs" loading="lazy">
+              <div class="featured__image-overlay">
+                <h3 class="featured__image-title" data-i18n="featured.side.title">O'zligingizni bizda toping</h3>
+                <div class="featured__image-line"></div>
+                <p class="featured__image-desc" data-i18n="featured.side.desc">
+                  2000 dan ortiq sara kitoblar bilan o'z dunyongizni boyiting va bugun o'zgarishni boshlang.
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </section>
+
+    <!-- ==== HOME CONTENT ==== -->
+    <div class="home-content" id="home-content">
+
 
       <!-- SEARCH -->
       <section class="search-section" id="search-section">
