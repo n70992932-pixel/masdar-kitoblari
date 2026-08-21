@@ -2248,15 +2248,15 @@ img {
 
 /* Base Typography & Colors */
 :root {
-  --color-primary: #3B82F6; /* Modern Blue */
-  --color-primary-dark: #2563EB;
+  --color-primary: #8B6508;
+  --color-primary-dark: #6E4935;
 }
 
 [data-theme="dark"] {
-  --color-bg: #0F172A; /* Slate 900 */
-  --color-surface: #1E293B; /* Slate 800 */
-  --color-border: #334155;
-  --color-primary: #3B82F6;
+  --color-bg: #161616;
+  --color-surface: #242424; 
+  --color-border: #333333;
+  --color-primary: #B8860B;
 }
 
 body {
@@ -2291,7 +2291,7 @@ body {
   background: #f1f5f9;
 }
 [data-theme="dark"] .book-card__cover {
-  background: #0f172a;
+  background: #242424;
 }
 
 .book-card__cover-art {
